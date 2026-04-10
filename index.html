@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xrange — Intelligent Mechanical Creatures</title>
-  <meta name="description" content="Xrange builds intelligent robots that perceive, think, and act. We're making dinosaurs smart.">
+  <title>Xrange — Intelligence, Embodied</title>
+  <meta name="description" content="Xrange builds embodied vehicles — intelligent machines that walk, see, and interact in the physical world. Meet Dragon Rider.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -82,28 +82,18 @@
       position:relative;padding:0 3rem;
       overflow:hidden;
     }
+    #hero-canvas{
+      position:absolute;inset:0;z-index:0;
+      width:100%;height:100%;
+      pointer-events:none;
+    }
     .hero-noise{
       position:absolute;inset:0;
       background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
-      pointer-events:none;
+      pointer-events:none;z-index:1;
     }
-    .hero-glow{
-      position:absolute;
-      width:min(900px,80vw);height:min(900px,80vw);
-      top:50%;left:50%;transform:translate(-50%,-50%);
-      background:radial-gradient(circle,rgba(200,255,0,.06) 0%,rgba(200,255,0,.02) 30%,transparent 70%);
-      pointer-events:none;
-    }
-    .hero-line{
-      position:absolute;top:0;bottom:0;
-      width:1px;background:rgba(255,255,255,.03);
-    }
-    .hero-line:nth-child(1){left:20%}
-    .hero-line:nth-child(2){left:40%}
-    .hero-line:nth-child(3){left:60%}
-    .hero-line:nth-child(4){left:80%}
     .hero-content{
-      position:relative;z-index:1;
+      position:relative;z-index:2;
       max-width:960px;
       padding:8rem 0;
     }
@@ -129,7 +119,7 @@
     }
     .hero-sub{
       font-size:clamp(1rem,2vw,1.2rem);
-      color:var(--text-muted);max-width:520px;
+      color:var(--text-muted);max-width:560px;
       line-height:1.8;font-weight:300;
       margin-bottom:3rem;
     }
@@ -150,7 +140,7 @@
     .hero-cta svg{width:14px;height:14px;transition:transform .2s}
     .hero-cta:hover svg{transform:translateX(4px)}
     .hero-scroll{
-      position:absolute;bottom:3rem;left:3rem;
+      position:absolute;bottom:3rem;left:3rem;z-index:2;
       display:flex;flex-direction:column;align-items:center;gap:.5rem;
       font-size:.65rem;font-weight:500;letter-spacing:.15em;
       text-transform:uppercase;color:var(--text-dim);
@@ -184,6 +174,45 @@
       max-width:560px;line-height:1.8;font-weight:300;
     }
 
+    /* ── Product ── */
+    .product{
+      position:relative;overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+    .product .section-inner{
+      display:grid;grid-template-columns:1fr 1fr;gap:5rem;
+      align-items:center;
+    }
+    .product-visual{
+      position:relative;aspect-ratio:4/3;
+      display:flex;align-items:center;justify-content:center;
+      background:radial-gradient(ellipse at center,rgba(200,255,0,.04) 0%,transparent 70%);
+      border:1px solid rgba(255,255,255,.04);
+      border-radius:2px;
+    }
+    .product-visual-label{
+      font-size:.7rem;font-weight:600;letter-spacing:.15em;
+      text-transform:uppercase;color:var(--text-dim);
+    }
+    .product-text .section-desc{margin-bottom:2rem}
+    .product-features{
+      display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+      margin-top:2rem;
+    }
+    .product-feature{
+      padding:1.25rem;
+      border:1px solid rgba(255,255,255,.04);
+      transition:border-color .3s;
+    }
+    .product-feature:hover{border-color:rgba(200,255,0,.15)}
+    .product-feature h4{
+      font-size:.8rem;font-weight:600;letter-spacing:.04em;
+      margin-bottom:.4rem;
+    }
+    .product-feature p{
+      font-size:.75rem;color:var(--text-dim);line-height:1.6;
+    }
+
     /* ── Vision ── */
     .vision{position:relative;overflow:hidden}
     .vision .section-inner{
@@ -194,15 +223,12 @@
       position:relative;aspect-ratio:1;
       display:flex;align-items:center;justify-content:center;
     }
-    .dna-helix{
-      width:100%;height:100%;position:relative;
-    }
+    .dna-helix{width:100%;height:100%;position:relative}
     .dna-strand{
       position:absolute;
       width:3px;border-radius:2px;
       background:linear-gradient(to bottom,transparent,var(--accent),var(--accent-warm),transparent);
-      opacity:.15;
-      animation:strand-drift 8s ease-in-out infinite;
+      opacity:.15;animation:strand-drift 8s ease-in-out infinite;
     }
     .dna-strand:nth-child(1){left:15%;height:80%;top:10%;animation-delay:0s}
     .dna-strand:nth-child(2){left:30%;height:60%;top:20%;animation-delay:1s;opacity:.1}
@@ -214,8 +240,7 @@
       50%{transform:translateY(-10px) scaleY(1.05)}
     }
     .dna-pulse{
-      position:absolute;
-      width:200px;height:200px;
+      position:absolute;width:200px;height:200px;
       top:50%;left:50%;transform:translate(-50%,-50%);
       border-radius:50%;
       background:radial-gradient(circle,rgba(200,255,0,.1),transparent 70%);
@@ -228,8 +253,7 @@
     .dna-dots{position:absolute;inset:0}
     .dna-dot{
       position:absolute;width:4px;height:4px;border-radius:50%;
-      background:var(--accent);opacity:.3;
-      animation:dot-float 6s ease-in-out infinite;
+      background:var(--accent);opacity:.3;animation:dot-float 6s ease-in-out infinite;
     }
     .dna-dot:nth-child(1){top:20%;left:25%;animation-delay:0s}
     .dna-dot:nth-child(2){top:35%;left:65%;animation-delay:1.5s}
@@ -241,16 +265,22 @@
       0%,100%{transform:translate(0,0);opacity:.2}
       50%{transform:translate(5px,-8px);opacity:.6}
     }
+    .vision-beyond{
+      margin-top:2.5rem;padding-top:1.5rem;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    .vision-beyond p{
+      font-size:.8rem;color:var(--text-dim);line-height:1.7;
+      font-style:italic;
+    }
 
     /* ── Capabilities ── */
     .capabilities{background:var(--bg)}
     .cap-header{margin-bottom:4rem}
     .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.04)}
     .cap-card{
-      padding:2.5rem;
-      background:var(--bg);
-      transition:background .3s;
-      position:relative;
+      padding:2.5rem;background:var(--bg);
+      transition:background .3s;position:relative;
     }
     .cap-card:hover{background:var(--bg-elevated)}
     .cap-card::before{
@@ -261,13 +291,9 @@
     .cap-card:hover::before{opacity:1}
     .cap-num{
       font-size:.65rem;font-weight:600;letter-spacing:.1em;
-      color:var(--text-dim);margin-bottom:1.5rem;
-      font-variant-numeric:tabular-nums;
+      color:var(--text-dim);margin-bottom:1.5rem;font-variant-numeric:tabular-nums;
     }
-    .cap-card h3{
-      font-size:1.05rem;font-weight:600;margin-bottom:.75rem;
-      letter-spacing:-.01em;
-    }
+    .cap-card h3{font-size:1.05rem;font-weight:600;margin-bottom:.75rem;letter-spacing:-.01em}
     .cap-card p{font-size:.85rem;color:var(--text-muted);line-height:1.7}
 
     /* ── Philosophy ── */
@@ -276,20 +302,15 @@
       border-top:1px solid rgba(255,255,255,.04);
     }
     .phil-header{margin-bottom:4rem}
-    .phil-grid{
-      display:grid;grid-template-columns:1fr 1fr;gap:0;
-    }
+    .phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
     .phil-item{
-      padding:3rem;
-      border:1px solid rgba(255,255,255,.04);
-      margin:-1px 0 0 -1px;
-      transition:background .3s;
+      padding:3rem;border:1px solid rgba(255,255,255,.04);
+      margin:-1px 0 0 -1px;transition:background .3s;
     }
     .phil-item:hover{background:rgba(200,255,0,.02)}
     .phil-item .quote{
       font-size:1.6rem;font-weight:700;
-      line-height:1.2;letter-spacing:-.02em;
-      margin-bottom:1rem;
+      line-height:1.2;letter-spacing:-.02em;margin-bottom:1rem;
     }
     .phil-item .quote .hi{color:var(--accent)}
     .phil-item p{font-size:.85rem;color:var(--text-muted);line-height:1.7}
@@ -302,56 +323,56 @@
     }
     .stats-inner{
       max-width:1100px;margin:0 auto;
-      display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;
-      text-align:center;
+      display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;
     }
     .stat-num{
-      font-size:clamp(2rem,4vw,3rem);
-      font-weight:700;color:var(--accent);
-      letter-spacing:-.03em;
-      line-height:1;margin-bottom:.5rem;
+      font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--accent);
+      letter-spacing:-.03em;line-height:1;margin-bottom:.5rem;
     }
     .stat-label{
       font-size:.75rem;color:var(--text-dim);
-      letter-spacing:.06em;text-transform:uppercase;
-      font-weight:500;
+      letter-spacing:.06em;text-transform:uppercase;font-weight:500;
     }
 
-    /* ── Join ── */
-    .join{text-align:center}
-    .join .section-inner{max-width:700px}
-    .join .section-label{justify-content:center}
-    .join .section-title{margin-bottom:1.5rem}
-    .join .section-desc{margin:0 auto 3rem;max-width:500px}
-    .join-cta{
-      display:inline-flex;align-items:center;gap:.75rem;
-      padding:1rem 2.5rem;
-      border:1px solid rgba(200,255,0,.3);
-      background:transparent;color:var(--accent);
-      font-weight:600;font-size:.85rem;
-      text-decoration:none;letter-spacing:.06em;
-      text-transform:uppercase;
-      transition:all .25s;
-      clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+    /* ── Contact ── */
+    .contact{text-align:center}
+    .contact .section-inner{max-width:800px}
+    .contact .section-label{justify-content:center}
+    .contact .section-title{margin-bottom:1.5rem}
+    .contact .section-desc{margin:0 auto 3rem;max-width:520px}
+    .contact-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+      max-width:600px;margin:0 auto;
     }
-    .join-cta:hover{
-      background:rgba(200,255,0,.06);
-      border-color:var(--accent);
-      box-shadow:0 0 40px rgba(200,255,0,.08);
+    .contact-card{
+      padding:2rem;
+      border:1px solid rgba(255,255,255,.06);
+      transition:all .25s;text-align:center;
+      text-decoration:none;color:var(--text);
+      display:flex;flex-direction:column;align-items:center;gap:.75rem;
     }
+    .contact-card:hover{
+      border-color:rgba(200,255,0,.2);
+      background:rgba(200,255,0,.02);
+    }
+    .contact-card-icon{
+      width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,.08);border-radius:50%;
+    }
+    .contact-card-icon svg{width:18px;height:18px;color:var(--accent)}
+    .contact-card h4{font-size:.85rem;font-weight:600;letter-spacing:.02em}
+    .contact-card p{font-size:.75rem;color:var(--text-dim);line-height:1.5}
 
     /* ── Footer ── */
     footer{
-      padding:3rem;
-      border-top:1px solid rgba(255,255,255,.04);
+      padding:3rem;border-top:1px solid rgba(255,255,255,.04);
       display:flex;justify-content:space-between;align-items:center;
     }
     footer p{font-size:.7rem;color:var(--text-dim);letter-spacing:.04em}
     footer .footer-links{display:flex;gap:1.5rem}
     footer .footer-links a{
-      color:var(--text-dim);text-decoration:none;
-      font-size:.7rem;letter-spacing:.04em;
-      transition:color .2s;
+      color:var(--text-dim);text-decoration:none;font-size:.7rem;
+      letter-spacing:.04em;transition:color .2s;
     }
     footer .footer-links a:hover{color:var(--accent)}
 
@@ -361,30 +382,60 @@
 
     /* ── Responsive ── */
     @media(max-width:768px){
-      nav{padding:1rem 1.5rem}
-      .nav-logo img{height:32px}
+      nav{padding:1rem 1.25rem}
+      .nav-logo img{height:30px}
       .nav-links{
         display:none;position:absolute;top:100%;left:0;right:0;
         flex-direction:column;gap:0;
-        background:rgba(5,5,5,.96);
-        backdrop-filter:blur(24px);
-        border-bottom:1px solid rgba(255,255,255,.04);
-        padding:.75rem 0;
+        background:rgba(5,5,5,.96);backdrop-filter:blur(24px);
+        border-bottom:1px solid rgba(255,255,255,.04);padding:.75rem 0;
       }
       .nav-links.open{display:flex}
-      .nav-links a{padding:.75rem 1.5rem}
+      .nav-links a{padding:.75rem 1.5rem;font-size:.75rem}
       .nav-toggle{display:block}
-      .hero{padding:0 1.5rem}
-      .hero-content{padding:7rem 0 5rem}
+      .hero{padding:0 1.25rem;min-height:100svh;align-items:flex-end}
+      .hero-content{padding:0 0 4rem}
+      .hero h1{font-size:clamp(2.2rem,10vw,3.5rem);margin-bottom:1.25rem}
+      .hero-eyebrow{margin-bottom:1.5rem;font-size:.6rem}
+      .hero-sub{font-size:.9rem;line-height:1.7;margin-bottom:2rem;max-width:100%}
+      .hero-cta{padding:.85rem 1.75rem;font-size:.8rem}
       .hero-scroll{display:none}
-      section{padding:5rem 1.5rem}
-      .vision .section-inner{grid-template-columns:1fr;gap:3rem}
-      .vision-visual{max-width:280px;margin:0 auto}
+      section{padding:4rem 1.25rem}
+      .section-title{font-size:clamp(1.6rem,6vw,2.2rem)}
+      .section-desc{font-size:.9rem;line-height:1.7}
+      .section-label{font-size:.6rem}
+      .product .section-inner{grid-template-columns:1fr;gap:2rem}
+      .product-visual{aspect-ratio:16/9;min-height:140px}
+      .product-features{grid-template-columns:1fr;gap:1rem;margin-top:1.5rem}
+      .product-feature{padding:1rem}
+      .product-feature h4{font-size:.75rem}
+      .product-feature p{font-size:.7rem}
+      .vision .section-inner{grid-template-columns:1fr;gap:2.5rem}
+      .vision-visual{max-width:220px;margin:0 auto}
+      .vision-beyond p{font-size:.75rem}
       .cap-grid{grid-template-columns:1fr}
+      .cap-card{padding:1.75rem}
+      .cap-card h3{font-size:.95rem}
+      .cap-card p{font-size:.8rem}
       .phil-grid{grid-template-columns:1fr}
-      .stats-inner{grid-template-columns:repeat(2,1fr);gap:2rem}
-      .stats{padding:3rem 1.5rem}
-      footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
+      .phil-item{padding:2rem 1.5rem}
+      .phil-item .quote{font-size:1.3rem}
+      .phil-item p{font-size:.8rem}
+      .stats-inner{grid-template-columns:repeat(2,1fr);gap:1.5rem}
+      .stats{padding:2.5rem 1.25rem}
+      .stat-num{font-size:clamp(1.6rem,8vw,2.2rem)}
+      .stat-label{font-size:.65rem}
+      .contact-grid{grid-template-columns:1fr;gap:1rem}
+      .contact-card{padding:1.5rem}
+      footer{flex-direction:column;gap:1rem;text-align:center;padding:1.5rem 1.25rem}
+    }
+
+    @media(max-width:380px){
+      .hero h1{font-size:2rem}
+      .hero-sub{font-size:.85rem}
+      .section-title{font-size:1.5rem}
+      .phil-item .quote{font-size:1.15rem}
+      .product-features{gap:.75rem}
     }
   </style>
 </head>
@@ -395,10 +446,11 @@
   <a href="#" class="nav-logo"><img src="logo.png" alt="Xrange"></a>
   <div class="nav-right">
     <ul class="nav-links" id="navLinks">
+      <li><a href="#product" data-i18n="nav.product"></a></li>
       <li><a href="#vision" data-i18n="nav.vision"></a></li>
       <li><a href="#capabilities" data-i18n="nav.capabilities"></a></li>
       <li><a href="#philosophy" data-i18n="nav.philosophy"></a></li>
-      <li><a href="#join" data-i18n="nav.join"></a></li>
+      <li><a href="#contact" data-i18n="nav.contact"></a></li>
     </ul>
     <div class="lang-switch">
       <button class="lang-btn active" data-lang="en">EN</button>
@@ -414,22 +466,50 @@
 
 <!-- Hero -->
 <section class="hero">
+  <canvas id="hero-canvas"></canvas>
   <div class="hero-noise"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-line"></div>
-  <div class="hero-line"></div>
-  <div class="hero-line"></div>
-  <div class="hero-line"></div>
   <div class="hero-content">
     <div class="hero-eyebrow"><span data-i18n="hero.badge"></span></div>
     <h1 data-i18n-html="hero.title"></h1>
     <p class="hero-sub" data-i18n-html="hero.subtitle"></p>
-    <a href="#vision" class="hero-cta">
+    <a href="#product" class="hero-cta">
       <span data-i18n="hero.cta"></span>
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </a>
   </div>
   <div class="hero-scroll"><span>Scroll</span></div>
+</section>
+
+<!-- Product -->
+<section class="product" id="product">
+  <div class="section-inner">
+    <div class="product-text reveal">
+      <div class="section-label" data-i18n="product.label"></div>
+      <h2 class="section-title" data-i18n-html="product.title"></h2>
+      <p class="section-desc" data-i18n="product.desc"></p>
+      <div class="product-features">
+        <div class="product-feature">
+          <h4 data-i18n="product.walk.title"></h4>
+          <p data-i18n="product.walk.desc"></p>
+        </div>
+        <div class="product-feature">
+          <h4 data-i18n="product.see.title"></h4>
+          <p data-i18n="product.see.desc"></p>
+        </div>
+        <div class="product-feature">
+          <h4 data-i18n="product.act.title"></h4>
+          <p data-i18n="product.act.desc"></p>
+        </div>
+        <div class="product-feature">
+          <h4 data-i18n="product.experience.title"></h4>
+          <p data-i18n="product.experience.desc"></p>
+        </div>
+      </div>
+    </div>
+    <div class="product-visual reveal">
+      <span class="product-visual-label" data-i18n="product.visual"></span>
+    </div>
+  </div>
 </section>
 
 <!-- Vision -->
@@ -457,6 +537,9 @@
       <div class="section-label" data-i18n="vision.label"></div>
       <h2 class="section-title" data-i18n-html="vision.title"></h2>
       <p class="section-desc" data-i18n="vision.desc"></p>
+      <div class="vision-beyond">
+        <p data-i18n="vision.beyond"></p>
+      </div>
     </div>
   </div>
 </section>
@@ -555,16 +638,28 @@
   </div>
 </section>
 
-<!-- Join -->
-<section class="join" id="join">
+<!-- Contact -->
+<section class="contact" id="contact">
   <div class="section-inner reveal">
-    <div class="section-label" data-i18n="join.label"></div>
-    <h2 class="section-title" data-i18n-html="join.title"></h2>
-    <p class="section-desc" data-i18n-html="join.desc"></p>
-    <a href="mailto:hr@xrange.tech" class="join-cta">
-      <span data-i18n="join.cta"></span>
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-    </a>
+    <div class="section-label" data-i18n="contact.label"></div>
+    <h2 class="section-title" data-i18n-html="contact.title"></h2>
+    <p class="section-desc" data-i18n-html="contact.desc"></p>
+    <div class="contact-grid">
+      <a href="mailto:yu@lanji.ai" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg>
+        </div>
+        <h4 data-i18n="contact.join.title"></h4>
+        <p data-i18n="contact.join.desc"></p>
+      </a>
+      <a href="mailto:yu@lanji.ai" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>
+        </div>
+        <h4 data-i18n="contact.biz.title"></h4>
+        <p data-i18n="contact.biz.desc"></p>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -572,38 +667,283 @@
 <footer>
   <p>&copy; 2025 – 2026 Xrange. All rights reserved.</p>
   <div class="footer-links">
-    <a href="mailto:hr@xrange.tech">Contact</a>
+    <a href="mailto:yu@lanji.ai">Contact</a>
   </div>
 </footer>
 
+<!-- Three.js Particle Hero -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (() => {
+  // ── Three.js Hero Particles — Dragon Rider (contour-line style) ──
+  const canvas = document.getElementById('hero-canvas');
+  if (canvas) {
+    const isMobile = window.innerWidth <= 768;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: !isMobile });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.z = isMobile ? 38 : 30;
+
+    // Continuous contour paths — particles sample along these lines
+    // Each sub-array is a stroke; interpolation between sequential points
+    const paths = [
+      // Dragon outer contour (one continuous stroke: snout → head → neck → back → tail tip)
+      [[9.8,2.6],[9.5,3.1],[9,3.3],[8.5,3.1],[8,2.8],[7.5,3],[7,3.3],[6.5,3.5],[6,3.6],[5.5,3.5],[5,3.6],[4.5,3.9],[4,4.1],[3.5,4.3],[3,4.4],[2.5,4.3],[2,4.2],[1.5,4.1],[1,4],[0.5,3.9],[0,3.8],[-0.5,3.7],[-1,3.6],[-1.5,3.5],[-2,3.4],[-2.5,3.2],[-3,3],[-3.5,2.7],[-4,2.4],[-4.5,2.1],[-5,1.8],[-5.5,1.5],[-6,1.2],[-6.5,0.9],[-7,0.6],[-7.5,0.3],[-8,0],[-8.5,-0.3]],
+      // Dragon jaw line (snout → under jaw → throat → belly → hind)
+      [[9.8,2.3],[9.5,2],[9,1.8],[8.5,1.7],[8,1.8],[7.5,1.6],[7,1.7],[6.5,1.9],[6,2.1],[5.5,2],[5,1.6],[4.5,1.2],[4,0.9],[3.5,0.7],[3,0.5],[2.5,0.4],[2,0.4],[1.5,0.5],[1,0.6],[0.5,0.8],[0,1],[-0.5,1.3]],
+      // Hind leg right
+      [[1.8,0.4],[2,0],[2.2,-0.6],[2.3,-1.3],[2.1,-2],[1.9,-2.7],[1.6,-3.3],[1.3,-3.8],[1.2,-4.2],[1.5,-4.5],[2,-4.5],[2.3,-4.2]],
+      // Hind leg left
+      [[-0.2,0.6],[-0.4,0],[-0.6,-0.6],[-0.7,-1.3],[-0.5,-2],[-0.3,-2.7],[-0.1,-3.3],[0.1,-3.8],[0.2,-4.2],[-0.1,-4.5],[0.4,-4.5],[0.7,-4.2]],
+      // Small forearms
+      [[5.2,1.8],[5.4,1.2],[5.5,0.6],[5.3,0.3]],
+      [[4.8,1.6],[5,1],[5.1,0.5],[4.9,0.2]],
+      // Spine ridge spikes
+      [[4.5,4],[4.3,4.5],[4.5,3.9]],
+      [[3.8,4.2],[3.6,4.7],[3.8,4.1]],
+      [[3,4.4],[2.8,4.9],[3,4.3]],
+      [[0.5,4],[0.3,4.4],[0.5,3.9]],
+      [[-.2,3.8],[-.4,4.2],[-.2,3.7]],
+      // ── Rider ──
+      // Rider body (seated, leaning forward)
+      [[1,3.6],[1.2,4.2],[1.4,4.8],[1.6,5.3],[1.7,5.8],[1.7,6.2],[1.6,6.6]],
+      // Rider head
+      [[1.4,6.6],[1.3,6.9],[1.5,7.1],[1.8,7],[1.7,6.7]],
+      // Rider arm reaching forward
+      [[1.8,5.8],[2.3,5.5],[2.8,5.2],[3.3,4.9],[3.8,4.7],[4.2,4.5]],
+      // Rider other arm
+      [[1.5,5.6],[1.9,5.3],[2.3,5],[2.7,4.8]],
+      // Rider right leg
+      [[2,4.2],[2.2,3.8],[2.3,3.4],[2.2,3.2]],
+      // Rider left leg
+      [[0.8,4.2],[0.6,3.8],[0.5,3.4],[0.6,3.2]],
+      // Eye (small bright dot cluster — handled by a single point)
+      [[8.9,2.9]],
+    ];
+
+    // Sample points along paths with interpolation
+    function samplePaths(paths, totalPoints) {
+      const out = [];
+      // Measure total path length
+      let totalLen = 0;
+      const pathLens = [];
+      for (const p of paths) {
+        let len = 0;
+        for (let i = 1; i < p.length; i++) {
+          const dx = p[i][0] - p[i-1][0], dy = p[i][1] - p[i-1][1];
+          len += Math.sqrt(dx*dx + dy*dy);
+        }
+        pathLens.push(Math.max(len, 0.01));
+        totalLen += Math.max(len, 0.01);
+      }
+      // Distribute points proportional to path length
+      for (let pi = 0; pi < paths.length; pi++) {
+        const p = paths[pi];
+        const n = Math.max(Math.round(totalPoints * pathLens[pi] / totalLen), 2);
+        if (p.length === 1) {
+          // single-point path (eye)
+          for (let k = 0; k < 12; k++) out.push([p[0][0], p[0][1]]);
+          continue;
+        }
+        // Build cumulative distances
+        const segs = [0];
+        for (let i = 1; i < p.length; i++) {
+          const dx = p[i][0] - p[i-1][0], dy = p[i][1] - p[i-1][1];
+          segs.push(segs[i-1] + Math.sqrt(dx*dx + dy*dy));
+        }
+        const pLen = segs[segs.length - 1];
+        for (let i = 0; i < n; i++) {
+          const d = (i / (n - 1)) * pLen;
+          let si = 0;
+          while (si < segs.length - 2 && segs[si+1] < d) si++;
+          const segLen = segs[si+1] - segs[si];
+          const t = segLen > 0 ? (d - segs[si]) / segLen : 0;
+          out.push([
+            p[si][0] + (p[si+1][0] - p[si][0]) * t,
+            p[si][1] + (p[si+1][1] - p[si][1]) * t,
+          ]);
+        }
+      }
+      return out;
+    }
+
+    const PARTICLE_COUNT = isMobile ? 3000 : 6000;
+    const sampled = samplePaths(paths, PARTICLE_COUNT);
+
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    const targets = new Float32Array(PARTICLE_COUNT * 3);
+    const alphas = new Float32Array(PARTICLE_COUNT);
+    const sizes = new Float32Array(PARTICLE_COUNT);
+
+    const S = 1.5;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const i3 = i * 3;
+      // scattered start
+      positions[i3]     = (Math.random() - 0.5) * 60;
+      positions[i3 + 1] = (Math.random() - 0.5) * 50;
+      positions[i3 + 2] = (Math.random() - 0.5) * 12;
+
+      const sp = sampled[i % sampled.length];
+      const jitter = 0.25;
+      targets[i3]     = sp[0] * S + (Math.random() - 0.5) * jitter;
+      targets[i3 + 1] = sp[1] * S + (Math.random() - 0.5) * jitter;
+      targets[i3 + 2] = (Math.random() - 0.5) * 1.5;
+
+      alphas[i] = 0.4 + Math.random() * 0.6;
+      sizes[i] = Math.random() * 0.9 + 0.2;
+    }
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('aAlpha', new THREE.BufferAttribute(alphas, 1));
+    geo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+    const mat = new THREE.ShaderMaterial({
+      uniforms: { uTime: { value: 0 } },
+      vertexShader: `
+        attribute float size;
+        attribute float aAlpha;
+        varying float vAlpha;
+        void main() {
+          vAlpha = aAlpha;
+          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = size * (160.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        varying float vAlpha;
+        void main() {
+          float d = length(gl_PointCoord - vec2(0.5));
+          if (d > 0.5) discard;
+          float glow = smoothstep(0.5, 0.0, d);
+          float core = smoothstep(0.3, 0.0, d);
+          float alpha = glow * vAlpha * 0.5;
+          vec3 col = mix(vec3(0.35, 0.45, 0.0), vec3(0.784, 1.0, 0.0), core);
+          gl_FragColor = vec4(col, alpha);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+
+    const particles = new THREE.Points(geo, mat);
+    particles.position.set(isMobile ? 1 : 6, isMobile ? 4 : -2, 0);
+    scene.add(particles);
+
+    let assembled = false;
+    let assembleStart = 0;
+    const ASSEMBLE_DURATION = 3.0;
+    const SCATTER_DURATION = 1.0;
+    let mouseX = 0, mouseY = 0;
+
+    window.addEventListener('mousemove', e => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    function resize() {
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      const mobile = w <= 768;
+      camera.position.z = mobile ? 38 : 30;
+      particles.position.set(mobile ? 1 : 6, mobile ? 4 : -2, 0);
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    let time = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      time += 0.016;
+      mat.uniforms.uTime.value = time;
+
+      const pos = geo.attributes.position.array;
+      let t;
+      if (!assembled) {
+        t = Math.min(time / SCATTER_DURATION, 1);
+        if (t >= 1) { assembled = true; assembleStart = time; }
+      }
+      if (assembled) {
+        t = Math.min((time - assembleStart) / ASSEMBLE_DURATION, 1);
+      }
+
+      const eased = assembled ? easeOutCubic(t) : 1 - easeOutCubic(t);
+      const speed = 0.03;
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const i3 = i * 3;
+        const tx = targets[i3], ty = targets[i3+1], tz = targets[i3+2];
+
+        if (assembled) {
+          const breath = Math.sin(time * 1.0 + tx * 0.15) * 0.08;
+          pos[i3]     += (tx - pos[i3]) * speed * eased + Math.sin(time * 0.6 + i * 0.3) * 0.002;
+          pos[i3 + 1] += (ty + breath - pos[i3 + 1]) * speed * eased + Math.cos(time * 0.4 + i * 0.2) * 0.002;
+          pos[i3 + 2] += (tz - pos[i3 + 2]) * speed * eased;
+        } else {
+          pos[i3]     += Math.sin(time + i * 0.01) * 0.012;
+          pos[i3 + 1] += Math.cos(time * 0.7 + i * 0.01) * 0.012;
+          pos[i3 + 2] += Math.sin(time * 0.5 + i * 0.02) * 0.006;
+        }
+      }
+      geo.attributes.position.needsUpdate = true;
+
+      particles.rotation.y = mouseX * 0.05 + Math.sin(time * 0.12) * 0.02;
+      particles.rotation.x = -mouseY * 0.025;
+
+      renderer.render(scene, camera);
+    }
+
+    function easeOutCubic(x) { return 1 - Math.pow(1 - x, 3); }
+    animate();
+  }
+
+  // ── i18n ──
   const i18n = {
     en: {
+      'nav.product': 'Dragon Rider',
       'nav.vision': 'Vision',
-      'nav.capabilities': 'Capabilities',
+      'nav.capabilities': 'Technology',
       'nav.philosophy': 'Philosophy',
-      'nav.join': 'Join',
-      'hero.badge': 'Robotics · AI · Sim2Real',
-      'hero.title': 'We make<br>machines<br><span class="glow">hunt.</span>',
-      'hero.subtitle': 'Xrange builds intelligent creatures that perceive, decide, and act in the physical world. Starting with dinosaurs.',
-      'hero.cta': 'Explore',
+      'nav.contact': 'Contact',
+      'hero.badge': 'Embodied Vehicles · AI · Sim2Real',
+      'hero.title': 'Intelligence,<br><span class="glow">embodied.</span>',
+      'hero.subtitle': 'Xrange builds machines that walk, see, and act on their own. Autonomous creatures designed for immersive real-world experiences.',
+      'hero.cta': 'Meet Dragon Rider',
+      'product.label': 'First Product',
+      'product.title': '<span class="glow">Dragon Rider</span>',
+      'product.desc': 'A biped embodied vehicle in the form of a dinosaur. It stands, walks, tracks targets, and interacts physically — all powered by reinforcement learning and sim-to-real transfer.',
+      'product.visual': 'Visual coming soon',
+      'product.walk.title': 'Autonomous Locomotion',
+      'product.walk.desc': 'Bipedal walking with dynamic balance. RL-trained gaits deployed on real hardware.',
+      'product.see.title': 'Visual Tracking',
+      'product.see.desc': 'Real-time target recognition and pursuit. It sees, locks on, and follows.',
+      'product.act.title': 'Physical Interaction',
+      'product.act.desc': 'Force-controlled robotic head for grasping and engaging with targets.',
+      'product.experience.title': 'Immersive Experiences',
+      'product.experience.desc': 'Designed for interactive scenarios where audiences encounter autonomous creatures.',
       'vision.label': 'Vision',
-      'vision.title': 'Install intelligence<br>onto any machine.',
-      'vision.desc': 'We\'re not just building robots — we\'re building a capability layer. From locomotion to perception, from autonomous decision to physical interaction. Intelligence as a module, deployable to any mechanical carrier.',
-      'cap.label': 'Capabilities',
+      'vision.title': 'Install intelligence<br>onto <span class="glow">any</span> machine.',
+      'vision.desc': 'We build a capability layer — from locomotion to perception, from autonomous decision to physical interaction. Intelligence as a module, deployable to any mechanical carrier. We call them embodied vehicles.',
+      'vision.beyond': 'Dragon Rider is the first form. What follows: mechs, serpents, insects — any shape that can move through the world.',
+      'cap.label': 'Technology',
       'cap.title': 'Core Stack',
-      'cap.desc': 'End-to-end robotics intelligence — from perception to decision to action.',
+      'cap.desc': 'The intelligence layer that makes embodied vehicles possible — from perception to action.',
       'cap.motion.title': 'Autonomous Locomotion',
-      'cap.motion.desc': 'RL-based motion control for bipedal walking, dynamic balance, and real-world terrain navigation.',
+      'cap.motion.desc': 'RL-based motion control for bipedal walking, dynamic balance, and terrain adaptation. Trained in simulation, deployed on real hardware.',
       'cap.vision.title': 'Visual Perception',
-      'cap.vision.desc': 'Universal recognition and target tracking. Robots that see, understand, and lock on.',
+      'cap.vision.desc': 'Real-time recognition and target tracking at 30Hz. The eyes that let our vehicles see and lock on.',
       'cap.interaction.title': 'Physical Interaction',
-      'cap.interaction.desc': 'Force-controlled manipulation with robotic arms. Not just walk and see — grab and act.',
+      'cap.interaction.desc': 'Force-controlled manipulation for grasping and engaging. Not just walk and see — grab and act.',
       'cap.sim.title': 'Sim2Real Pipeline',
-      'cap.sim.desc': 'High-fidelity simulation with reliable sim-to-real transfer. Train virtually, deploy physically.',
+      'cap.sim.desc': 'High-fidelity simulation with reliable sim-to-real transfer. Train millions of steps virtually, deploy physically.',
       'cap.behavior.title': 'Behavioral Intelligence',
-      'cap.behavior.desc': 'AI-driven autonomous decision systems. Dynamic strategies adapted to environment and objectives.',
+      'cap.behavior.desc': 'Autonomous decision systems that adapt strategy to environment and objectives in real time.',
       'cap.stack.title': 'Full-Stack Integration',
       'cap.stack.desc': 'From circuits to algorithms. Deep hardware-software co-design for system-level reliability.',
       'stats.team.num': '7',
@@ -625,38 +965,55 @@
       'phil.curiosity.desc': 'Genuine curiosity about problems beats a sense of duty to complete tasks. We always ask why.',
       'phil.ai.quote': 'AI is the tool.<br><span class="hi">Judgment is yours.</span>',
       'phil.ai.desc': 'We use frontier AI to accelerate everything. But technical judgment — that must be your own.',
-      'join.label': 'Join',
-      'join.title': 'Build things that<br>actually move.',
-      'join.desc': 'We don\'t care about degrees or pedigree.<br>We care if you can figure out what needs doing — when nobody tells you.',
-      'join.cta': 'Get in Touch',
+      'contact.label': 'Get in Touch',
+      'contact.title': 'Build with us.<br>Or build <span class="glow">on</span> us.',
+      'contact.desc': 'Whether you want to join the team or explore what Dragon Rider can do for your venue — let\'s talk.',
+      'contact.join.title': 'Join the Team',
+      'contact.join.desc': 'We care about judgment, not degrees. If you can figure out what needs doing — reach out.',
+      'contact.biz.title': 'Business Inquiry',
+      'contact.biz.desc': 'Interested in bringing autonomous creatures to your space? Let\'s explore together.',
     },
     zh: {
+      'nav.product': '小龙骑士',
       'nav.vision': '愿景',
-      'nav.capabilities': '能力',
+      'nav.capabilities': '技术',
       'nav.philosophy': '信条',
-      'nav.join': '加入',
-      'hero.badge': '机器人 · AI · Sim2Real',
-      'hero.title': '让机械造物<br><span class="glow">追着咬。</span>',
-      'hero.subtitle': 'Xrange 构建能感知、决策、行动的智能造物。从恐龙开始。',
-      'hero.cta': '了解更多',
+      'nav.contact': '联系',
+      'hero.badge': '具身载具 · AI · Sim2Real',
+      'hero.title': '让智能<br><span class="glow">具身而行。</span>',
+      'hero.subtitle': 'Xrange 构建能自主行走、感知、交互的智能造物。为沉浸式真实体验而生。',
+      'hero.cta': '认识小龙骑士',
+      'product.label': '首款产品',
+      'product.title': '<span class="glow">小龙骑士</span>',
+      'product.desc': '恐龙形态的双足具身载具。能站、能走、能追踪目标、能物理交互——全部由强化学习和 Sim2Real 驱动。',
+      'product.visual': '视觉素材即将上线',
+      'product.walk.title': '自主行走',
+      'product.walk.desc': '基于强化学习的双足步态，在真实硬件上实现动态平衡。',
+      'product.see.title': '视觉追踪',
+      'product.see.desc': '实时目标识别与追踪。看见、锁定、跟随。',
+      'product.act.title': '物理交互',
+      'product.act.desc': '力控机械龙头，可抓取和接触目标。',
+      'product.experience.title': '沉浸体验',
+      'product.experience.desc': '为观众与自主智能造物相遇的互动场景而设计。',
       'vision.label': 'Vision',
-      'vision.title': '让任何机械结构<br>快速拥有智能。',
-      'vision.desc': '我们不只是在造机器人——我们在构建一套能力基座。从运动控制到视觉感知，从自主决策到物理交互，让「智能」可以像模块一样被赋予任何机械载体。',
-      'cap.label': 'Capabilities',
+      'vision.title': '让任何机械结构<br>快速拥有<span class="glow">智能</span>。',
+      'vision.desc': '我们在构建一套能力基座——从运动控制到视觉感知，从自主决策到物理交互。让「智能」可以像模块一样，被赋予任何机械载体。我们称之为具身载具。',
+      'vision.beyond': '小龙骑士是第一种形态。之后将是：大型机甲、蛇形机器人、昆虫机器人——任何能在世界中穿行的形态。',
+      'cap.label': 'Technology',
       'cap.title': '核心能力栈',
-      'cap.desc': '横跨感知、决策与行动的端到端机器人智能。',
+      'cap.desc': '让具身载具成为可能的智能层——从感知到行动。',
       'cap.motion.title': '自主运动',
-      'cap.motion.desc': '基于强化学习的运动控制，实现双足行走、动态平衡与复杂地形导航。',
+      'cap.motion.desc': '基于强化学习的运动控制，实现双足行走、动态平衡与地形适应。仿真训练，真机部署。',
       'cap.vision.title': '视觉感知',
-      'cap.vision.desc': '通用视觉识别与目标追踪，让机器人看见世界、锁定目标。',
+      'cap.vision.desc': '30Hz 实时识别与目标追踪。让载具看见世界、锁定目标。',
       'cap.interaction.title': '物理交互',
-      'cap.interaction.desc': '力控机械臂操作。不只看和走——还能抓、能操作。',
+      'cap.interaction.desc': '力控操作，实现抓取与接触。不只看和走——还能抓、能交互。',
       'cap.sim.title': 'Sim2Real 管线',
-      'cap.sim.desc': '高保真物理仿真与可靠的 Sim2Real 迁移。虚拟世界训练，真实世界部署。',
+      'cap.sim.desc': '高保真物理仿真与可靠的 Sim2Real 迁移。虚拟世界训练千万步，真实世界部署。',
       'cap.behavior.title': '行为决策',
-      'cap.behavior.desc': 'AI 驱动的自主决策系统。根据环境和目标动态调整策略。',
+      'cap.behavior.desc': '自主决策系统，根据环境和目标实时调整策略。',
       'cap.stack.title': '全栈集成',
-      'cap.stack.desc': '从电路到算法的端到端设计。软硬件深度协同，确保系统级可靠。',
+      'cap.stack.desc': '从电路到算法。软硬件深度协同，确保系统级可靠。',
       'stats.team.num': '7',
       'stats.team.label': '核心团队',
       'stats.dof.num': '12+',
@@ -676,10 +1033,13 @@
       'phil.curiosity.desc': '对问题本身的好奇心，比完成任务的责任感更有价值。我们鼓励追问「为什么」。',
       'phil.ai.quote': 'AI 是工具。<br><span class="hi">判断是你的。</span>',
       'phil.ai.desc': '全员使用最前沿的 AI 工具加速一切。但技术判断——必须是你自己的。',
-      'join.label': 'Join',
-      'join.title': '和我们一起<br>造真正会动的东西。',
-      'join.desc': '我们不在乎学历和年限。<br>我们在乎你能不能在没人告诉你「该做什么」的时候，自己判断该做什么。',
-      'join.cta': '联系我们',
+      'contact.label': '联系我们',
+      'contact.title': '和我们一起造。<br>或者，<span class="glow">用我们造的</span>。',
+      'contact.desc': '无论你想加入团队，还是想了解小龙骑士能为你的场地带来什么——聊聊。',
+      'contact.join.title': '加入团队',
+      'contact.join.desc': '我们在乎判断力，不在乎学历。如果你能自己判断该做什么——来聊。',
+      'contact.biz.title': '商务合作',
+      'contact.biz.desc': '想把自主智能造物带进你的空间？一起探索。',
     }
   };
 
@@ -703,7 +1063,7 @@
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
 
-    const titleMap = { en: 'Xrange — Intelligent Mechanical Creatures', zh: 'Xrange — 让机械拥有智能' };
+    const titleMap = { en: 'Xrange — Intelligence, Embodied', zh: 'Xrange — 让智能具身而行' };
     document.title = titleMap[lang];
   }
 
