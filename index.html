@@ -3,25 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xrange — Intelligence, Embodied</title>
-  <meta name="description" content="Xrange builds embodied vehicles — intelligent machines that walk, see, and interact in the physical world. Meet Dragon Rider.">
+  <title>Xrange — Rideable Biped Platform</title>
+  <meta name="description" content="Xrange is building an early biped platform for future riding and load-bearing human-machine interaction. Our latest milestone: sim-to-real control standing stably on real hardware.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     :root{
-      --bg:#050505;
-      --bg-elevated:#0d0d0d;
-      --bg-subtle:#161616;
-      --bg-card:#0a0a0a;
-      --text:#e8e8e8;
-      --text-muted:#888;
-      --text-dim:#555;
+      --bg:#030405;
+      --bg-elevated:#0b0d0e;
+      --bg-subtle:#121617;
+      --bg-card:#080a0b;
+      --text:#e7ece8;
+      --text-muted:#8b948d;
+      --text-dim:#535c55;
       --accent:#c8ff00;
       --accent-dim:#6b8700;
       --accent-warm:#ff6b2b;
       --accent-glow:rgba(200,255,0,.08);
+      --steel:#93a09a;
+      --danger:#ff4d2f;
       --font:'Space Grotesk','Noto Sans SC',system-ui,-apple-system,sans-serif;
     }
     html{scroll-behavior:smooth;font-size:16px}
@@ -139,6 +141,26 @@
     }
     .hero-cta svg{width:14px;height:14px;transition:transform .2s}
     .hero-cta:hover svg{transform:translateX(4px)}
+    .hero-signals{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
+      max-width:760px;margin-top:2rem;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.06);
+      clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);
+    }
+    .hero-signal{
+      padding:1rem 1.1rem;
+      background:linear-gradient(180deg,rgba(12,15,15,.94),rgba(5,6,6,.94));
+    }
+    .hero-signal b{
+      display:block;margin-bottom:.25rem;
+      font-size:.7rem;font-weight:700;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--accent);
+    }
+    .hero-signal span{
+      display:block;font-size:.78rem;line-height:1.5;
+      color:var(--text-muted);
+    }
     .hero-scroll{
       position:absolute;bottom:3rem;left:3rem;z-index:2;
       display:flex;flex-direction:column;align-items:center;gap:.5rem;
@@ -169,6 +191,10 @@
       font-weight:700;letter-spacing:-.03em;
       line-height:1.1;margin-bottom:1.25rem;
     }
+    .glow{
+      color:var(--accent);
+      text-shadow:0 0 64px rgba(200,255,0,.24);
+    }
     .section-desc{
       font-size:1rem;color:var(--text-muted);
       max-width:560px;line-height:1.8;font-weight:300;
@@ -186,13 +212,34 @@
     .product-visual{
       position:relative;aspect-ratio:4/3;
       display:flex;align-items:center;justify-content:center;
-      background:radial-gradient(ellipse at center,rgba(200,255,0,.04) 0%,transparent 70%);
+      background:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),
+        radial-gradient(ellipse at center,rgba(200,255,0,.055) 0%,transparent 66%),
+        linear-gradient(180deg,rgba(18,22,22,.95),rgba(5,6,6,.95));
+      background-size:28px 28px,28px 28px,auto,auto;
       border:1px solid rgba(255,255,255,.04);
       border-radius:2px;
+      overflow:hidden;
+    }
+    .product-visual::before{
+      content:'';position:absolute;inset:12%;
+      border:1px solid rgba(200,255,0,.16);
+      clip-path:polygon(18% 0,82% 0,100% 28%,100% 72%,82% 100%,18% 100%,0 72%,0 28%);
+      box-shadow:inset 0 0 60px rgba(200,255,0,.035);
+    }
+    .product-visual::after{
+      content:'';position:absolute;width:62%;height:44%;
+      border:2px solid rgba(147,160,154,.24);
+      border-left-width:8px;border-right-width:8px;
+      transform:skewX(-10deg);
+      filter:drop-shadow(0 0 28px rgba(200,255,0,.08));
     }
     .product-visual-label{
-      font-size:.7rem;font-weight:600;letter-spacing:.15em;
-      text-transform:uppercase;color:var(--text-dim);
+      position:relative;z-index:1;max-width:300px;text-align:center;
+      font-size:.68rem;font-weight:700;letter-spacing:.15em;line-height:1.7;
+      text-transform:uppercase;color:var(--steel);
+      text-shadow:0 0 24px rgba(0,0,0,.8);
     }
     .product-text .section-desc{margin-bottom:2rem}
     .product-features{
@@ -399,6 +446,8 @@
       .hero-eyebrow{margin-bottom:1.5rem;font-size:.6rem}
       .hero-sub{font-size:.9rem;line-height:1.7;margin-bottom:2rem;max-width:100%}
       .hero-cta{padding:.85rem 1.75rem;font-size:.8rem}
+      .hero-signals{grid-template-columns:1fr;margin-top:1.5rem}
+      .hero-signal{padding:.85rem 1rem}
       .hero-scroll{display:none}
       section{padding:4rem 1.25rem}
       .section-title{font-size:clamp(1.6rem,6vw,2.2rem)}
@@ -476,6 +525,20 @@
       <span data-i18n="hero.cta"></span>
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
     </a>
+    <div class="hero-signals">
+      <div class="hero-signal">
+        <b data-i18n="hero.signal.form.title"></b>
+        <span data-i18n="hero.signal.form.desc"></span>
+      </div>
+      <div class="hero-signal">
+        <b data-i18n="hero.signal.stage.title"></b>
+        <span data-i18n="hero.signal.stage.desc"></span>
+      </div>
+      <div class="hero-signal">
+        <b data-i18n="hero.signal.proof.title"></b>
+        <span data-i18n="hero.signal.proof.desc"></span>
+      </div>
+    </div>
   </div>
   <div class="hero-scroll"><span>Scroll</span></div>
 </section>
@@ -906,140 +969,152 @@
   // ── i18n ──
   const i18n = {
     en: {
-      'nav.product': 'Dragon Rider',
-      'nav.vision': 'Vision',
+      'nav.product': 'Platform',
+      'nav.vision': 'Direction',
       'nav.capabilities': 'Technology',
-      'nav.philosophy': 'Philosophy',
+      'nav.philosophy': 'Signals',
       'nav.contact': 'Contact',
-      'hero.badge': 'Embodied Vehicles · AI · Sim2Real',
-      'hero.title': 'Intelligence,<br><span class="glow">embodied.</span>',
-      'hero.subtitle': 'Xrange builds machines that walk, see, and act on their own. Autonomous creatures designed for immersive real-world experiences.',
-      'hero.cta': 'Meet Dragon Rider',
-      'product.label': 'First Product',
-      'product.title': '<span class="glow">Dragon Rider</span>',
-      'product.desc': 'A biped embodied vehicle in the form of a dinosaur. It stands, walks, tracks targets, and interacts physically — all powered by reinforcement learning and sim-to-real transfer.',
-      'product.visual': 'Visual coming soon',
-      'product.walk.title': 'Autonomous Locomotion',
-      'product.walk.desc': 'Bipedal walking with dynamic balance. RL-trained gaits deployed on real hardware.',
-      'product.see.title': 'Visual Tracking',
-      'product.see.desc': 'Real-time target recognition and pursuit. It sees, locks on, and follows.',
-      'product.act.title': 'Physical Interaction',
-      'product.act.desc': 'Force-controlled robotic head for grasping and engaging with targets.',
-      'product.experience.title': 'Immersive Experiences',
-      'product.experience.desc': 'Designed for interactive scenarios where audiences encounter autonomous creatures.',
-      'vision.label': 'Vision',
-      'vision.title': 'Install intelligence<br>onto <span class="glow">any</span> machine.',
-      'vision.desc': 'We build a capability layer — from locomotion to perception, from autonomous decision to physical interaction. Intelligence as a module, deployable to any mechanical carrier. We call them embodied vehicles.',
-      'vision.beyond': 'Dragon Rider is the first form. What follows: mechs, serpents, insects — any shape that can move through the world.',
+      'hero.badge': 'Bare-Frame Robotics · AI Control · Sim-to-Real',
+      'hero.title': 'An early biped platform<br>for <span class="glow">future riding.</span>',
+      'hero.subtitle': 'Xrange is building a human-scale tactical machine designed toward future riding and load-bearing human-machine interaction. The first hard step has landed: control has crossed from simulation into real hardware.',
+      'hero.cta': 'See the Platform',
+      'hero.signal.form.title': 'Form',
+      'hero.signal.form.desc': 'A bare-frame biped machine, closer to a platform than a humanoid.',
+      'hero.signal.stage.title': 'Stage',
+      'hero.signal.stage.desc': 'Early hardware phase. Future riding direction, not a finished transport product.',
+      'hero.signal.proof.title': 'Proof',
+      'hero.signal.proof.desc': 'Sim-to-real control now holds a stable standing posture on hardware.',
+      'product.label': 'Platform Identity',
+      'product.title': '<span class="glow">Rideable</span> Biped Platform',
+      'product.desc': 'We are building a biped platform designed for future riding and load-bearing interaction. It is not a conventional humanoid. It is the early real-world form of a human-scale machine that can stand, carry, extend, and eventually move with people.',
+      'product.visual': 'Bare-frame machine · human scale · load-bearing direction',
+      'product.walk.title': 'Biped Foundation',
+      'product.walk.desc': 'Standing and walking are the base layer for future rideable robotics. Stability comes before spectacle.',
+      'product.see.title': 'Machine Perception',
+      'product.see.desc': 'Real-time tracking and embodied sensing turn the platform from a shell into an acting machine.',
+      'product.act.title': 'Load-Bearing Interaction',
+      'product.act.desc': 'The system is being shaped for future human-machine contact, carrying, and physical interaction.',
+      'product.experience.title': 'Tactical Presence',
+      'product.experience.desc': 'A cold industrial silhouette built to feel powerful at human scale without overstating what is ready.',
+      'vision.label': 'Direction',
+      'vision.title': 'A new robotic<br><span class="glow">form factor</span> is emerging.',
+      'vision.desc': 'Our first public story is not "a robot that looks like something familiar." It is an early biped platform: rideable in direction, load-bearing in ambition, and grounded by real sim-to-real progress.',
+      'vision.beyond': 'What matters now is anticipation: if this machine can already stand on real hardware, what will the next milestone unlock?',
       'cap.label': 'Technology',
-      'cap.title': 'Core Stack',
-      'cap.desc': 'The intelligence layer that makes embodied vehicles possible — from perception to action.',
-      'cap.motion.title': 'Autonomous Locomotion',
-      'cap.motion.desc': 'RL-based motion control for bipedal walking, dynamic balance, and terrain adaptation. Trained in simulation, deployed on real hardware.',
-      'cap.vision.title': 'Visual Perception',
-      'cap.vision.desc': 'Real-time recognition and target tracking at 30Hz. The eyes that let our vehicles see and lock on.',
-      'cap.interaction.title': 'Physical Interaction',
-      'cap.interaction.desc': 'Force-controlled manipulation for grasping and engaging. Not just walk and see — grab and act.',
+      'cap.title': 'Credibility Under the Surface',
+      'cap.desc': 'The visual hook is the machine. The technical proof is the control stack that moves from simulation into hardware.',
+      'cap.motion.title': 'Stable Standing Control',
+      'cap.motion.desc': 'The latest milestone is simple and fundamental: the real machine can hold a stable standing posture on hardware.',
+      'cap.vision.title': 'Embodied Perception',
+      'cap.vision.desc': 'Real-time target tracking gives the platform a way to orient, react, and build toward interactive scenarios.',
+      'cap.interaction.title': 'Physical Interface',
+      'cap.interaction.desc': 'Mechanical contact, load-bearing structure, and future riding all require a body that can safely interact with people.',
       'cap.sim.title': 'Sim2Real Pipeline',
-      'cap.sim.desc': 'High-fidelity simulation with reliable sim-to-real transfer. Train millions of steps virtually, deploy physically.',
-      'cap.behavior.title': 'Behavioral Intelligence',
-      'cap.behavior.desc': 'Autonomous decision systems that adapt strategy to environment and objectives in real time.',
-      'cap.stack.title': 'Full-Stack Integration',
-      'cap.stack.desc': 'From circuits to algorithms. Deep hardware-software co-design for system-level reliability.',
+      'cap.sim.desc': 'Control models are trained and tested in simulation, then transferred into the real machine for hardware validation.',
+      'cap.behavior.title': 'Behavior Layer',
+      'cap.behavior.desc': 'Standing, tracking, approaching, and interacting are built as staged capabilities instead of one vague demo promise.',
+      'cap.stack.title': 'Hardware-Software Stack',
+      'cap.stack.desc': 'Motors, structure, power, control, perception, and policy training are developed as one integrated machine.',
       'stats.team.num': '7',
       'stats.team.label': 'Team Members',
-      'stats.dof.num': '12+',
-      'stats.dof.label': 'Degrees of Freedom',
-      'stats.sim.num': '10M+',
-      'stats.sim.label': 'Sim Steps / Day',
-      'stats.founded.num': '2025',
-      'stats.founded.label': 'Founded',
-      'phil.label': 'Beliefs',
-      'phil.title': 'How We Think',
-      'phil.desc': 'What drives us isn\'t just technology — it\'s conviction about how things should be built.',
-      'phil.judgment.quote': '<span class="hi">Judgment</span><br>over skills.',
-      'phil.judgment.desc': 'In the age of AI, "knowing how" isn\'t scarce. Making good calls under ambiguity is.',
-      'phil.right.quote': '"It runs" ≠<br><span class="hi">"it\'s right."</span>',
-      'phil.right.desc': 'We chase correctness, not completion. Surface progress can mask structural failure.',
-      'phil.curiosity.quote': '<span class="hi">Curiosity</span> is<br>irreplaceable.',
-      'phil.curiosity.desc': 'Genuine curiosity about problems beats a sense of duty to complete tasks. We always ask why.',
-      'phil.ai.quote': 'AI is the tool.<br><span class="hi">Judgment is yours.</span>',
-      'phil.ai.desc': 'We use frontier AI to accelerate everything. But technical judgment — that must be your own.',
+      'stats.dof.num': 'Human',
+      'stats.dof.label': 'Scale Machine',
+      'stats.sim.num': 'Sim→Real',
+      'stats.sim.label': 'Control Milestone',
+      'stats.founded.num': 'Early',
+      'stats.founded.label': 'Rideable Direction',
+      'phil.label': 'Signals',
+      'phil.title': 'What We Want People to Feel',
+      'phil.desc': 'The story is built around three emotions: awe, credibility, and anticipation.',
+      'phil.judgment.quote': '<span class="hi">Awe</span><br>at first sight.',
+      'phil.judgment.desc': 'A low-angle, bare-frame, human-scale machine should feel different before anyone reads a spec sheet.',
+      'phil.right.quote': '<span class="hi">Credibility</span><br>after the hook.',
+      'phil.right.desc': 'Not concept art. Real hardware, real standing, real sim-to-real progress.',
+      'phil.curiosity.quote': '<span class="hi">Anticipation</span><br>for the next step.',
+      'phil.curiosity.desc': 'The point is not to claim the final product is here. It is to make the next milestone worth following.',
+      'phil.ai.quote': 'Toward riding.<br><span class="hi">Not pretending it is ready.</span>',
+      'phil.ai.desc': 'Every phrase leaves room for future walking and riding without overstating the current state.',
       'contact.label': 'Get in Touch',
-      'contact.title': 'Build with us.<br>Or build <span class="glow">on</span> us.',
-      'contact.desc': 'Whether you want to join the team or explore what Dragon Rider can do for your venue — let\'s talk.',
+      'contact.title': 'Follow the machine<br>as it becomes <span class="glow">rideable.</span>',
+      'contact.desc': 'For talent, partners, venues, and backers who understand that the hard first step is not a render. It is real hardware standing under control.',
       'contact.join.title': 'Join the Team',
-      'contact.join.desc': 'We care about judgment, not degrees. If you can figure out what needs doing — reach out.',
+      'contact.join.desc': 'Help us turn sim-to-real control, structure, and interaction into a new robotic platform.',
       'contact.biz.title': 'Business Inquiry',
-      'contact.biz.desc': 'Interested in bringing autonomous creatures to your space? Let\'s explore together.',
+      'contact.biz.desc': 'Interested in the future of human-scale robotic experiences? Let\'s talk.',
     },
     zh: {
-      'nav.product': '小龙骑士',
-      'nav.vision': '愿景',
+      'nav.product': '平台',
+      'nav.vision': '方向',
       'nav.capabilities': '技术',
-      'nav.philosophy': '信条',
+      'nav.philosophy': '信号',
       'nav.contact': '联系',
-      'hero.badge': '具身载具 · AI · Sim2Real',
-      'hero.title': '让智能<br><span class="glow">具身而行。</span>',
-      'hero.subtitle': 'Xrange 构建能自主行走、感知、交互的智能造物。为沉浸式真实体验而生。',
-      'hero.cta': '认识小龙骑士',
-      'product.label': '首款产品',
-      'product.title': '<span class="glow">小龙骑士</span>',
-      'product.desc': '恐龙形态的双足具身载具。能站、能走、能追踪目标、能物理交互——全部由强化学习和 Sim2Real 驱动。',
-      'product.visual': '视觉素材即将上线',
-      'product.walk.title': '自主行走',
-      'product.walk.desc': '基于强化学习的双足步态，在真实硬件上实现动态平衡。',
-      'product.see.title': '视觉追踪',
-      'product.see.desc': '实时目标识别与追踪。看见、锁定、跟随。',
-      'product.act.title': '物理交互',
-      'product.act.desc': '力控机械龙头，可抓取和接触目标。',
-      'product.experience.title': '沉浸体验',
-      'product.experience.desc': '为观众与自主智能造物相遇的互动场景而设计。',
-      'vision.label': 'Vision',
-      'vision.title': '让任何机械结构<br>快速拥有<span class="glow">智能</span>。',
-      'vision.desc': '我们在构建一套能力基座——从运动控制到视觉感知，从自主决策到物理交互。让「智能」可以像模块一样，被赋予任何机械载体。我们称之为具身载具。',
-      'vision.beyond': '小龙骑士是第一种形态。之后将是：大型机甲、蛇形机器人、昆虫机器人——任何能在世界中穿行的形态。',
+      'hero.badge': '裸机骨架 · AI 控制 · Sim-to-Real',
+      'hero.title': '面向未来骑乘的<br>早期<span class="glow">双足平台。</span>',
+      'hero.subtitle': 'Xrange 正在构建一种 human-scale tactical machine：面向未来骑乘与承载式人机交互。最难的第一步已经落地：控制模型从仿真迁移到真机，并能在硬件上稳定站立。',
+      'hero.cta': '查看平台',
+      'hero.signal.form.title': '形态',
+      'hero.signal.form.desc': '裸机骨架、双足结构，更像平台，而不是普通 humanoid。',
+      'hero.signal.stage.title': '阶段',
+      'hero.signal.stage.desc': '早期硬件阶段。方向是未来骑乘，不是宣称交通载具已完成。',
+      'hero.signal.proof.title': '证据',
+      'hero.signal.proof.desc': 'Sim-to-Real 控制已在真机硬件上实现稳定站立姿态。',
+      'product.label': '平台身份',
+      'product.title': '<span class="glow">Rideable</span> Biped Platform',
+      'product.desc': '我们正在构建面向未来骑乘和承载交互的双足平台。它不是传统人形机器人，而是一种早期落地的 human-scale machine：能站立、能承载、可扩展，并最终走向人与机器共同运动。',
+      'product.visual': '裸机骨架 · 人机尺度 · 承载方向',
+      'product.walk.title': '双足基础',
+      'product.walk.desc': '站立和行走是未来 rideable robotics 的底层能力。稳定性先于炫技。',
+      'product.see.title': '机器感知',
+      'product.see.desc': '实时追踪与具身感知，让平台从机械外壳变成能行动的机器。',
+      'product.act.title': '承载式交互',
+      'product.act.desc': '系统正在面向未来的人机接触、承载和物理交互持续成形。',
+      'product.experience.title': '战术存在感',
+      'product.experience.desc': '冷硬工业轮廓、人机尺度压迫感，但不抢跑当前能力边界。',
+      'vision.label': 'Direction',
+      'vision.title': '一种新的机器人<br><span class="glow">形态</span>正在出现。',
+      'vision.desc': '对外故事不是“像某个经典 IP 的机器人”，而是一种早期双足平台：方向上可骑乘，目标上可承载，可信度来自真实 Sim-to-Real 进展。',
+      'vision.beyond': '现在最重要的是 anticipation：如果它已经能在真机上稳定站立，下一步会解锁什么？',
       'cap.label': 'Technology',
-      'cap.title': '核心能力栈',
-      'cap.desc': '让具身载具成为可能的智能层——从感知到行动。',
-      'cap.motion.title': '自主运动',
-      'cap.motion.desc': '基于强化学习的运动控制，实现双足行走、动态平衡与地形适应。仿真训练，真机部署。',
-      'cap.vision.title': '视觉感知',
-      'cap.vision.desc': '30Hz 实时识别与目标追踪。让载具看见世界、锁定目标。',
-      'cap.interaction.title': '物理交互',
-      'cap.interaction.desc': '力控操作，实现抓取与接触。不只看和走——还能抓、能交互。',
+      'cap.title': '视觉钩子背后的技术可信度',
+      'cap.desc': '前台让人一眼记住这台机器，后台用控制、仿真和真机验证压住可信度。',
+      'cap.motion.title': '稳定站立控制',
+      'cap.motion.desc': '最新里程碑很简单，也很关键：真实机器已经能在硬件上保持稳定站立姿态。',
+      'cap.vision.title': '具身感知',
+      'cap.vision.desc': '实时目标追踪让平台具备朝向、反应和进入互动场景的基础。',
+      'cap.interaction.title': '物理接口',
+      'cap.interaction.desc': '机械接触、承载结构和未来骑乘，都需要一个能与人安全交互的身体。',
       'cap.sim.title': 'Sim2Real 管线',
-      'cap.sim.desc': '高保真物理仿真与可靠的 Sim2Real 迁移。虚拟世界训练千万步，真实世界部署。',
-      'cap.behavior.title': '行为决策',
-      'cap.behavior.desc': '自主决策系统，根据环境和目标实时调整策略。',
-      'cap.stack.title': '全栈集成',
-      'cap.stack.desc': '从电路到算法。软硬件深度协同，确保系统级可靠。',
+      'cap.sim.desc': '控制模型先在仿真中训练和测试，再迁移到真实机器上做硬件验证。',
+      'cap.behavior.title': '行为层',
+      'cap.behavior.desc': '站立、追踪、接近、交互按阶段构建，不把一个模糊大 Demo 说满。',
+      'cap.stack.title': '软硬件一体',
+      'cap.stack.desc': '电机、结构、电源、控制、感知和策略训练，被作为同一台机器整体推进。',
       'stats.team.num': '7',
       'stats.team.label': '核心团队',
-      'stats.dof.num': '12+',
-      'stats.dof.label': '自由度',
-      'stats.sim.num': '1000万+',
-      'stats.sim.label': '每日仿真步数',
-      'stats.founded.num': '2025',
-      'stats.founded.label': '成立年份',
-      'phil.label': 'Beliefs',
-      'phil.title': '我们的信条',
-      'phil.desc': '驱动 Xrange 的不只是技术，更是一套关于「怎么做事」的信念。',
-      'phil.judgment.quote': '<span class="hi">判断力</span><br>比技能更重要。',
-      'phil.judgment.desc': 'AI 时代，「会」不再稀缺。稀缺的是面对模糊时做出好判断的能力。',
-      'phil.right.quote': '「能跑」≠<br><span class="hi">「做对了」</span>',
-      'phil.right.desc': '我们追求方向的正确性，不追求完成度。表面进展可能掩盖结构性问题。',
-      'phil.curiosity.quote': '<span class="hi">好奇心</span><br>不可替代。',
-      'phil.curiosity.desc': '对问题本身的好奇心，比完成任务的责任感更有价值。我们鼓励追问「为什么」。',
-      'phil.ai.quote': 'AI 是工具。<br><span class="hi">判断是你的。</span>',
-      'phil.ai.desc': '全员使用最前沿的 AI 工具加速一切。但技术判断——必须是你自己的。',
+      'stats.dof.num': 'Human',
+      'stats.dof.label': '人机尺度',
+      'stats.sim.num': 'Sim→Real',
+      'stats.sim.label': '控制里程碑',
+      'stats.founded.num': 'Early',
+      'stats.founded.label': '骑乘方向',
+      'phil.label': 'Signals',
+      'phil.title': '我们希望海外用户感受到什么',
+      'phil.desc': '这条叙事围绕三个情绪：awe、credibility、anticipation。',
+      'phil.judgment.quote': '<span class="hi">Awe</span><br>第一眼震撼。',
+      'phil.judgment.desc': '低机位、裸露结构、人机尺度的机器，应该在用户读参数前就显得不一样。',
+      'phil.right.quote': '<span class="hi">Credibility</span><br>钩子之后有证据。',
+      'phil.right.desc': '不是概念图。是真机、真站立、真实 Sim-to-Real 进展。',
+      'phil.curiosity.quote': '<span class="hi">Anticipation</span><br>等待下一步。',
+      'phil.curiosity.desc': '重点不是宣称最终产品已经完成，而是让用户愿意持续关注下一个里程碑。',
+      'phil.ai.quote': '朝向骑乘。<br><span class="hi">不假装已经完成。</span>',
+      'phil.ai.desc': '每一句表达都给未来 walk / ride 留钩子，同时守住当前能力边界。',
       'contact.label': '联系我们',
-      'contact.title': '和我们一起造。<br>或者，<span class="glow">用我们造的</span>。',
-      'contact.desc': '无论你想加入团队，还是想了解小龙骑士能为你的场地带来什么——聊聊。',
+      'contact.title': '持续关注这台机器<br>如何走向<span class="glow">可骑乘</span>。',
+      'contact.desc': '面向理解硬件难度的人才、合作方、场地方和支持者：真正困难的第一步不是渲染图，而是真机在控制下站起来。',
       'contact.join.title': '加入团队',
-      'contact.join.desc': '我们在乎判断力，不在乎学历。如果你能自己判断该做什么——来聊。',
+      'contact.join.desc': '和我们一起把 Sim-to-Real 控制、结构和交互推进成一种新的机器人平台。',
       'contact.biz.title': '商务合作',
-      'contact.biz.desc': '想把自主智能造物带进你的空间？一起探索。',
+      'contact.biz.desc': '如果你关注人机尺度机器人体验的未来，我们可以聊聊。',
     }
   };
 
@@ -1063,7 +1138,7 @@
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
 
-    const titleMap = { en: 'Xrange — Intelligence, Embodied', zh: 'Xrange — 让智能具身而行' };
+    const titleMap = { en: 'Xrange — Rideable Biped Platform', zh: 'Xrange — 面向未来骑乘的双足平台' };
     document.title = titleMap[lang];
   }
 
